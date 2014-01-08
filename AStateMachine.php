@@ -249,6 +249,7 @@ class AStateMachine extends CBehavior implements IApplicationComponent {
 		else {
 			$this->setStateName($to);
 		}
+		$this->afterTransition($fromState);
 
 		if ($this->enableTransitionHistory) {
 			if ($this->maximumTransitionHistorySize !== null && ($c = $this->getTransitionHistory()->count() - $this->maximumTransitionHistorySize) >= 0) {
@@ -259,7 +260,6 @@ class AStateMachine extends CBehavior implements IApplicationComponent {
 			}
 			$this->getTransitionHistory()->add($to);
 		}
-		$this->afterTransition($fromState);
 		return true;
 	}
 
